@@ -15,11 +15,19 @@ class CoffeeMachine {
     }
 
     pressTea() {
-        this.drinkMaker.execute("T::")
+        if (this.sugar) {
+            this.drinkMaker.execute("T:1:0")
+        } else {
+            this.drinkMaker.execute("T::")
+        }
     }
 
     pressChocolate() {
-        this.drinkMaker.execute("H::")
+        if (this.sugar) {
+            this.drinkMaker.execute("H:1:0")
+        } else {
+            this.drinkMaker.execute("H::")
+        }
     }
 
     pressSugar() {

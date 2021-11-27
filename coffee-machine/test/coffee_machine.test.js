@@ -31,24 +31,27 @@ describe('CoffeeMachine', function() {
     expect(drinkMaker.execute).toHaveBeenCalledWith("H::");
   })
 
-  it('add sugar to the coffee when sugar button is pressed', function(){
-    coffeeMachine.pressSugar()
-    coffeeMachine.pressCoffee()
+  describe('when suggar is pressed once before selecting drink', () => {
 
-    expect(drinkMaker.execute).toHaveBeenCalledWith("C:1:0")
-  })
+    it('serves coffee with one sugar and one stick', function(){
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressCoffee()
 
-  it('add sugar to the tea when sugar button is pressed', function(){
-    coffeeMachine.pressSugar()
-    coffeeMachine.pressTea()
+      expect(drinkMaker.execute).toHaveBeenCalledWith("C:1:0")
+    })
 
-    expect(drinkMaker.execute).toHaveBeenCalledWith("T:1:0")
-  })
+    it('serves tea with one sugar and one stick', function(){
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressTea()
 
-  it('add sugar to the chocolate when sugar button is pressed', function(){
-    coffeeMachine.pressSugar()
-    coffeeMachine.pressChocolate()
+      expect(drinkMaker.execute).toHaveBeenCalledWith("T:1:0")
+    })
 
-    expect(drinkMaker.execute).toHaveBeenCalledWith("H:1:0")
-  })
+    it('serves chocolate with one sugar and one stick', function(){
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressChocolate()
+
+      expect(drinkMaker.execute).toHaveBeenCalledWith("H:1:0")
+    })
+  });
 });

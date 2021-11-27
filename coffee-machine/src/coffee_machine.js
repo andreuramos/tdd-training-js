@@ -1,13 +1,15 @@
 class CoffeeMachine {
 
-    constructor(drinkMaker)
-    {
+    constructor(drinkMaker) {
         this.drinkMaker = drinkMaker;
     }
 
-
     pressCoffee() {
         this.drinkMaker.execute("C::")
+    }
+
+    pressTea() {
+        this.drinkMaker.execute("T::")
     }
 }
 

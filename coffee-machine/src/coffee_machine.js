@@ -1,11 +1,17 @@
 class CoffeeMachine {
 
+    sugar = false
+
     constructor(drinkMaker) {
         this.drinkMaker = drinkMaker;
     }
 
     pressCoffee() {
-        this.drinkMaker.execute("C::")
+        if (this.sugar) {
+            this.drinkMaker.execute("C:1:0")
+        } else {
+            this.drinkMaker.execute("C::")
+        }
     }
 
     pressTea() {
@@ -14,6 +20,10 @@ class CoffeeMachine {
 
     pressChocolate() {
         this.drinkMaker.execute("H::")
+    }
+
+    pressSugar() {
+        this.sugar = true
     }
 }
 

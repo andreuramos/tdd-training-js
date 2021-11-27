@@ -2,10 +2,16 @@ let CoffeeMachine = require('../src/coffee_machine');
 let DrinkMaker = require('../src/drink_maker');
 
 describe('CoffeeMachine', function() {
-  let drinkMaker = {
-    execute: jest.fn(),
-  }
-  let coffeeMachine = new CoffeeMachine(drinkMaker);
+
+  let drinkMaker;
+  let coffeeMachine;
+
+  beforeEach(() => {
+    drinkMaker = {
+      execute: jest.fn(),
+    }
+    coffeeMachine = new CoffeeMachine(drinkMaker); 
+  })
 
   it('makes coffe when coffee button is pressed', function() {
     coffeeMachine.pressCoffee()
@@ -23,5 +29,12 @@ describe('CoffeeMachine', function() {
     coffeeMachine.pressChocolate()
 
     expect(drinkMaker.execute).toHaveBeenCalledWith("H::");
+  })
+
+  it('add sugar when sugar button is pressed', function(){
+    coffeeMachine.pressSugar()
+    coffeeMachine.pressCoffee()
+
+    expect(drinkMaker.execute).toHaveBeenCalledWith("C:1:0")
   })
 });

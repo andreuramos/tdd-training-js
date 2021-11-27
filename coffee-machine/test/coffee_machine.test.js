@@ -2,9 +2,13 @@ let CoffeeMachine = require('../src/coffee_machine');
 let DrinkMaker = require('../src/drink_maker');
 
 describe('CoffeeMachine', function() {
-  it('change_this_name', function() {
-    let coffeeMachine = new CoffeeMachine();
+  it('press_coffee_makes_coffee', function() {
+    let drinkMaker = {
+      execute: jest.fn(),
+    }
+    let coffeeMachine = new CoffeeMachine(drinkMaker);
+    coffeeMachine.pressCoffee()
 
-    expect(true).toBe(true);
+    expect(drinkMaker.execute).toHaveBeenCalledWith("C::");
   });
 });

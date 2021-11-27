@@ -54,4 +54,31 @@ describe('CoffeeMachine', function() {
       expect(drinkMaker.execute).toHaveBeenCalledWith("H:1:0")
     })
   });
+
+  describe('when suggar is pressed twice before selecting drink', () => {
+
+    it('serves coffee with two sugars and one stick', function(){
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressCoffee()
+
+      expect(drinkMaker.execute).toHaveBeenCalledWith("C:2:0")
+    })
+
+    it('serves tea with two sugars and one stick', function(){
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressTea()
+
+      expect(drinkMaker.execute).toHaveBeenCalledWith("T:2:0")
+    })
+
+    it('serves chocolate two one sugars and one stick', function(){
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressSugar()
+      coffeeMachine.pressChocolate()
+
+      expect(drinkMaker.execute).toHaveBeenCalledWith("H:2:0")
+    })
+  });
 });

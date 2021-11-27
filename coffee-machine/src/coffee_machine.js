@@ -11,6 +11,10 @@ class CoffeeMachine {
     pressTea() {
         this.drinkMaker.execute("T::")
     }
+
+    pressChocolate() {
+        this.drinkMaker.execute("H::")
+    }
 }
 
 module.exports = CoffeeMachine;

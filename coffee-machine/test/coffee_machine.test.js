@@ -21,4 +21,14 @@ describe('CoffeeMachine', function() {
 
     expect(drinkMaker.execute).toHaveBeenCalledWith("T::");
   })
+
+  it('makes chocolate when chocolate button is pressed', function() {
+    let drinkMaker = {
+      execute: jest.fn(),
+    }
+    let coffeeMachine = new CoffeeMachine(drinkMaker);
+    coffeeMachine.pressChocolate()
+
+    expect(drinkMaker.execute).toHaveBeenCalledWith("H::");
+  })
 });

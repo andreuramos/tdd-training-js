@@ -91,10 +91,47 @@ describe('CoffeeMachine', function() {
     })
   });
 
-  it('does not serve coffee if less than 0.6 euros have been inserted', () => {
-    coffeeMachine.putMoney(0.5);
-    coffeeMachine.pressCoffee();
+  describe('money management', () => {
+    it('does not serve coffee if less than 0.6 euros have been inserted', () => {
+      coffeeMachine.putMoney(0.59);
+      coffeeMachine.pressCoffee();
+   
+      expect(drinkMaker.execute).not.toHaveBeenCalled();
+    })
 
-    expect(drinkMaker.execute).not.toHaveBeenCalled();
+    it('serves coffee if 0.6 euros have been inserted', () => {
+      coffeeMachine.putMoney(0.6);
+      coffeeMachine.pressCoffee();
+   
+      expect(drinkMaker.execute).toHaveBeenCalled();
+    })
+  
+    it('does not serve tea if less than 0.4 euros have been inserted', () => {
+      coffeeMachine.putMoney(0.39);
+      coffeeMachine.pressTea();
+   
+      expect(drinkMaker.execute).not.toHaveBeenCalled();
+    })
+
+    it('serves tea if 0.4 euros have been inserted', () => {
+      coffeeMachine.putMoney(0.4);
+      coffeeMachine.pressTea();
+   
+      expect(drinkMaker.execute).toHaveBeenCalled();
+    })
+  
+    it('does not serve chocolate if less than 0.5 euros have been inserted', () => {
+      coffeeMachine.putMoney(0.49);
+      coffeeMachine.pressChocolate();
+   
+      expect(drinkMaker.execute).not.toHaveBeenCalled();
+    })
+
+    it('serves chocolate if 0.5 euros have been inserted', () => {
+      coffeeMachine.putMoney(0.5);
+      coffeeMachine.pressChocolate();
+   
+      expect(drinkMaker.execute).toHaveBeenCalled();
+    })
   })
 });

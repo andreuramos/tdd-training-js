@@ -20,6 +20,10 @@ class CoffeeMachine {
     }
 
     pressTea() {
+        if (this.money < 0.4) {
+            return;
+        }
+
         if (this.sugar > 0) {
             this.drinkMaker.execute(`T:${this.sugar}:0`)
         } else {
@@ -28,6 +32,10 @@ class CoffeeMachine {
     }
 
     pressChocolate() {
+        if (this.money < 0.5) {
+            return;
+        }
+
         if (this.sugar > 0) {
             this.drinkMaker.execute(`H:${this.sugar}:0`)
         } else {

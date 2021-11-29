@@ -1,12 +1,17 @@
 class CoffeeMachine {
 
     sugar = 0
+    money = 0
 
     constructor(drinkMaker) {
         this.drinkMaker = drinkMaker;
     }
 
     pressCoffee() {
+        if (this.money < 0.6) {
+            return;
+        }
+        
         if (this.sugar > 0) {
             this.drinkMaker.execute(`C:${this.sugar}:0`)
         } else {
@@ -32,6 +37,10 @@ class CoffeeMachine {
 
     pressSugar() {
         this.sugar++
+    }
+
+    putMoney(amount) {
+        this.money += amount
     }
 }
 

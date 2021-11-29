@@ -96,7 +96,7 @@ describe('CoffeeMachine', function() {
       coffeeMachine.putMoney(59);
       coffeeMachine.pressCoffee();
    
-      expect(drinkMaker.execute).not.toHaveBeenCalled();
+      expect(drinkMaker.execute).not.toHaveBeenCalledWith("C::")
     })
 
     it('serves coffee if 0.6 euros have been inserted', () => {
@@ -110,8 +110,9 @@ describe('CoffeeMachine', function() {
       coffeeMachine.putMoney(39);
       coffeeMachine.pressTea();
    
-      expect(drinkMaker.execute).not.toHaveBeenCalled();
+      expect(drinkMaker.execute).not.toHaveBeenCalledWith("T::")
     })
+    
 
     it('serves tea if 0.4 euros have been inserted', () => {
       coffeeMachine.putMoney(40);
@@ -124,7 +125,7 @@ describe('CoffeeMachine', function() {
       coffeeMachine.putMoney(49);
       coffeeMachine.pressChocolate();
    
-      expect(drinkMaker.execute).not.toHaveBeenCalled();
+      expect(drinkMaker.execute).not.toHaveBeenCalledWith("H::")
     })
 
     it('serves chocolate if 0.5 euros have been inserted', () => {
@@ -134,11 +135,28 @@ describe('CoffeeMachine', function() {
       expect(drinkMaker.execute).toHaveBeenCalled();
     })
 
-    xit('sends message when there is no enough money to serve a coffee', () => {
+    it('sends message when there is no enough money to serve a coffee', () => {
       coffeeMachine.putMoney(59);
       coffeeMachine.pressCoffee();
    
       expect(drinkMaker.execute).toHaveBeenCalledWith("M:missing 0.01");
+      expect(drinkMaker.execute).toHaveBeenCalledTimes(1);
+    })
+
+    it('sends message when there is no enough money to serve a tea', () => {
+      coffeeMachine.putMoney(39);
+      coffeeMachine.pressTea();
+   
+      expect(drinkMaker.execute).toHaveBeenCalledWith("M:missing 0.01");
+      expect(drinkMaker.execute).toHaveBeenCalledTimes(1);
+    })
+
+    it('sends message when there is no enough money to serve a chocolate', () => {
+      coffeeMachine.putMoney(49);
+      coffeeMachine.pressChocolate();
+   
+      expect(drinkMaker.execute).toHaveBeenCalledWith("M:missing 0.01");
+      expect(drinkMaker.execute).toHaveBeenCalledTimes(1);
     })
   })
 });

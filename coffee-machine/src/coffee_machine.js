@@ -9,7 +9,7 @@ class CoffeeMachine {
 
     pressCoffee() {
         if (this.money < 60) {
-            // this.drinkMaker.execute(`M:missing ${0.6 - this.money}`)
+            this.drinkMaker.execute(`M:missing ${(60 - this.money) / 100}`)
             return
         }
         
@@ -22,6 +22,7 @@ class CoffeeMachine {
 
     pressTea() {
         if (this.money < 40) {
+            this.drinkMaker.execute(`M:missing ${(40 - this.money) / 100}`)
             return;
         }
 
@@ -34,6 +35,7 @@ class CoffeeMachine {
 
     pressChocolate() {
         if (this.money < 50) {
+            this.drinkMaker.execute(`M:missing ${(50 - this.money) / 100}`)
             return;
         }
 

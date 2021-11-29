@@ -11,9 +11,17 @@ class CoffeeMachine {
         this.drinkMaker = drinkMaker;
     }
 
+    enoughMoney(drinkPrice) {
+        if (this.money < drinkPrice) {
+            this.drinkMaker.execute(`M:missing ${(drinkPrice - this.money) / 100}`)
+            return false
+        }
+
+        return true
+    }
+
     pressCoffee() {
-        if (this.money < this.COFFEE_PRICE) {
-            this.drinkMaker.execute(`M:missing ${(this.COFFEE_PRICE - this.money) / 100}`)
+        if (!this.enoughMoney(this.COFFEE_PRICE)) {
             return
         }
         
@@ -25,9 +33,8 @@ class CoffeeMachine {
     }
 
     pressTea() {
-        if (this.money < this.TEA_PRICE) {
-            this.drinkMaker.execute(`M:missing ${(this.TEA_PRICE - this.money) / 100}`)
-            return;
+        if (!this.enoughMoney(this.TEA_PRICE)) {
+            return
         }
 
         if (this.sugar > 0) {
@@ -38,8 +45,7 @@ class CoffeeMachine {
     }
 
     pressChocolate() {
-        if (this.money < this.CHOCOLATE_PRICE) {
-            this.drinkMaker.execute(`M:missing ${(this.CHOCOLATE_PRICE - this.money) / 100}`)
+        if (!this.enoughMoney(this.CHOCOLATE_PRICE)) {
             return;
         }
 

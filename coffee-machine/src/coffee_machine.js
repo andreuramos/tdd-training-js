@@ -3,13 +3,17 @@ class CoffeeMachine {
     sugar = 0
     money = 0
 
+    COFFEE_PRICE = 60
+    TEA_PRICE = 40
+    CHOCOLATE_PRICE = 50
+
     constructor(drinkMaker) {
         this.drinkMaker = drinkMaker;
     }
 
     pressCoffee() {
-        if (this.money < 60) {
-            this.drinkMaker.execute(`M:missing ${(60 - this.money) / 100}`)
+        if (this.money < this.COFFEE_PRICE) {
+            this.drinkMaker.execute(`M:missing ${(this.COFFEE_PRICE - this.money) / 100}`)
             return
         }
         
@@ -21,8 +25,8 @@ class CoffeeMachine {
     }
 
     pressTea() {
-        if (this.money < 40) {
-            this.drinkMaker.execute(`M:missing ${(40 - this.money) / 100}`)
+        if (this.money < this.TEA_PRICE) {
+            this.drinkMaker.execute(`M:missing ${(this.TEA_PRICE - this.money) / 100}`)
             return;
         }
 
@@ -34,8 +38,8 @@ class CoffeeMachine {
     }
 
     pressChocolate() {
-        if (this.money < 50) {
-            this.drinkMaker.execute(`M:missing ${(50 - this.money) / 100}`)
+        if (this.money < this.CHOCOLATE_PRICE) {
+            this.drinkMaker.execute(`M:missing ${(this.CHOCOLATE_PRICE - this.money) / 100}`)
             return;
         }
 

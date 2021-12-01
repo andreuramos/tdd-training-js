@@ -12,16 +12,12 @@ class CoffeeMachine {
     }
 
     enoughMoney(drinkPrice) {
-        if (this.money < drinkPrice) {
-            this.drinkMaker.execute(`M:missing ${(drinkPrice - this.money) / 100}`)
-            return false
-        }
-
-        return true
+        return this.money > drinkPrice
     }
 
     _processOrder(symbol, price) {
         if (!this.enoughMoney(price)) {
+            this.drinkMaker.execute(`M:missing ${(price - this.money) / 100}`)
             return
         }
 

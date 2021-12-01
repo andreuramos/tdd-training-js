@@ -1,11 +1,9 @@
+const Order = require("./order")
+
 class CoffeeMachine {
 
     sugar = 0
     money = 0
-
-    COFFEE_PRICE = 60
-    TEA_PRICE = 40
-    CHOCOLATE_PRICE = 50
 
     constructor(drinkMaker) {
         this.drinkMaker = drinkMaker;
@@ -15,29 +13,41 @@ class CoffeeMachine {
         return this.money > drinkPrice
     }
 
-    _processOrder(symbol, price) {
-        if (!this.enoughMoney(price)) {
-            this.drinkMaker.execute(`M:missing ${(price - this.money) / 100}`)
+    _processOrder(order) {
+        if (!this.enoughMoney(order.price)) {
+            this.drinkMaker.execute(`M:missing ${(order.price - this.money) / 100}`)
             return
         }
 
         if (this.sugar > 0) {
-            this.drinkMaker.execute(`${symbol}:${this.sugar}:0`)
+            this.drinkMaker.execute(`${order.drinkCode}:${order.sugar}:0`)
         } else {
-            this.drinkMaker.execute(`${symbol}::`)
+            this.drinkMaker.execute(`${order.drinkCode}::`)
         }
     }
 
     pressCoffee() {
-        this._processOrder("C", this.COFFEE_PRICE)
+        let order = new Order()
+        order.makeCoffee()
+        order.addSugar(this.sugar)
+
+        this._processOrder(order)
     }
 
     pressTea() {
-        this._processOrder("T", this.TEA_PRICE)
+        let order = new Order()
+        order.makeTea()
+        order.addSugar(this.sugar)
+
+        this._processOrder(order)
     }
 
     pressChocolate() {
-        this._processOrder("H", this.CHOCOLATE_PRICE)
+        let order = new Order()
+        order.makeChocolate()
+        order.addSugar(this.sugar)
+
+        this._processOrder(order)
     }
 
     pressSugar() {

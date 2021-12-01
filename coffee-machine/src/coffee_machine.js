@@ -8,6 +8,12 @@ class CoffeeMachine {
 
     constructor(drinkMaker) {
         this.drinkMaker = drinkMaker;
+        this.prices = {
+            "C": 60,
+            "T": 40,
+            "H": 50,
+            "O": 60,
+        }
     }
 
     enoughMoney(drinkPrice) {
@@ -15,14 +21,15 @@ class CoffeeMachine {
     }
 
     _processOrder(order) {
-        if (!this.enoughMoney(order.price)) {
-            this.drinkMaker.execute(`M:missing ${(order.price - this.money) / 100}`)
-            return
+        const price = this.prices[order.drinkType]
+        if (!this.enoughMoney(price)) {
+            this.drinkMaker.execute(`M:missing ${(price - this.money) / 100}`)
+            return 
         }
 
-        let drinkCommand = order.drinkCode
+        let drinkCommand = order.drinkType
 
-        if (order.isExtraHot) {
+        if (order.extraHot) {
             drinkCommand += 'h'
         }
         
@@ -40,38 +47,19 @@ class CoffeeMachine {
     }
 
     pressCoffee() {
-        let order = new Order()
-        order.makeCoffee()
-        order.addSugar(this.sugar)
-        order.extraHot(this.extraHot)
-
-        this._processOrder(order)
+        this._processOrder(new Order("C", this.sugar, this.extraHot))
     }
 
     pressTea() {
-        let order = new Order()
-        order.makeTea()
-        order.addSugar(this.sugar)
-        order.extraHot(this.extraHot)
-
-        this._processOrder(order)
+        this._processOrder(new Order("T", this.sugar, this.extraHot))
     }
 
     pressChocolate() {
-        let order = new Order()
-        order.makeChocolate()
-        order.addSugar(this.sugar)
-        order.extraHot(this.extraHot)
-
-        this._processOrder(order)
+        this._processOrder(new Order("H", this.sugar, this.extraHot))
     }
 
     pressOrange() {
-        let order = new Order()
-        order.makeOrangeJuice()
-        order.addSugar(this.sugar)
-
-        this._processOrder(order)
+        this._processOrder(new Order("O", this.sugar, false))
     }
 
     pressSugar() {

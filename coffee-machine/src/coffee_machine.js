@@ -50,6 +50,14 @@ class CoffeeMachine {
         this._processOrder(order)
     }
 
+    pressOrange() {
+        let order = new Order()
+        order.makeOrangeJuice()
+        order.addSugar(this.sugar)
+
+        this._processOrder(order)
+    }
+
     pressSugar() {
         this.sugar++
     }

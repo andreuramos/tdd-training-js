@@ -6,7 +6,7 @@ class CoffeeMachine {
     money = 0
     extraHot = false;
 
-    constructor(drinkMaker) {
+    constructor(drinkMaker /* DrinkMaker */) {
         this.drinkMaker = drinkMaker;
         this.prices = {
             "C": 60,
@@ -23,23 +23,11 @@ class CoffeeMachine {
     _processOrder(order) {
         const price = this.prices[order.drinkType]
         if (!this.enoughMoney(price)) {
-            this.drinkMaker.execute(`M:missing ${(price - this.money) / 100}`)
+            this.drinkMaker.printMessage(`missing ${(price - this.money) / 100}`)
             return 
         }
 
-        let drinkCommand = order.drinkType
-
-        if (order.extraHot) {
-            drinkCommand += 'h'
-        }
-        
-        if (this.sugar > 0) {
-            drinkCommand += `:${order.sugar}:0`
-        } else {
-            drinkCommand += '::'
-        }
-
-        this.drinkMaker.execute(drinkCommand)
+        this.drinkMaker.serveOrder(order)
     }
 
     pressExtraHot() {

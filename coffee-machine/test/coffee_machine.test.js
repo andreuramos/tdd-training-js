@@ -1,5 +1,6 @@
 let CoffeeMachine = require('../src/coffee_machine');
 let CheapDrinkMaker = require('../src/cheap_drink_maker');
+let CheapDrinkMakerAdapter = require('../src/cheap_drink_maker_adapter');
 
 describe('CoffeeMachine', function() {
 
@@ -10,7 +11,7 @@ describe('CoffeeMachine', function() {
     CheapDrinkMaker = {
       execute: jest.fn(),
     }
-    coffeeMachine = new CoffeeMachine(CheapDrinkMaker); 
+    coffeeMachine = new CoffeeMachine(new CheapDrinkMakerAdapter(CheapDrinkMaker)); 
   })
 
   it('makes coffe when coffee button is pressed', function() {

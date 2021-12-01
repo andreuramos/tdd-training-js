@@ -20,40 +20,28 @@ class CoffeeMachine {
         return true
     }
 
-    pressCoffee() {
-        if (!this.enoughMoney(this.COFFEE_PRICE)) {
+    _processOrder(symbol, price) {
+        if (!this.enoughMoney(price)) {
             return
         }
-        
+
         if (this.sugar > 0) {
-            this.drinkMaker.execute(`C:${this.sugar}:0`)
+            this.drinkMaker.execute(`${symbol}:${this.sugar}:0`)
         } else {
-            this.drinkMaker.execute("C::")
+            this.drinkMaker.execute(`${symbol}::`)
         }
+    }
+
+    pressCoffee() {
+        this._processOrder("C", this.COFFEE_PRICE)
     }
 
     pressTea() {
-        if (!this.enoughMoney(this.TEA_PRICE)) {
-            return
-        }
-
-        if (this.sugar > 0) {
-            this.drinkMaker.execute(`T:${this.sugar}:0`)
-        } else {
-            this.drinkMaker.execute("T::")
-        }
+        this._processOrder("T", this.TEA_PRICE)
     }
 
     pressChocolate() {
-        if (!this.enoughMoney(this.CHOCOLATE_PRICE)) {
-            return;
-        }
-
-        if (this.sugar > 0) {
-            this.drinkMaker.execute(`H:${this.sugar}:0`)
-        } else {
-            this.drinkMaker.execute("H::")
-        }
+        this._processOrder("H", this.CHOCOLATE_PRICE)
     }
 
     pressSugar() {

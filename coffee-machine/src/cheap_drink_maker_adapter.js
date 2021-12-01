@@ -1,10 +1,19 @@
+const Drink = require('./drink')
+
 class CheapDrinkMakerAdapter /* implements DrinkMaker */ {
     constructor(cheapDrinkMaker) {
         this.cheapDrinkMaker = cheapDrinkMaker
     }
 
     serveOrder(order){
-        let drinkCommand = order.drinkType
+        const drinkSymbols = {
+            [Drink.COFFEE]: "C",
+            [Drink.TEA]: "T",
+            [Drink.HOT_CHOCOLATE]: "H",
+            [Drink.ORANGE_JUICE]: "O", 
+        }
+        
+        let drinkCommand = drinkSymbols[order.drinkType]
 
         if (order.extraHot) {
             drinkCommand += 'h'

@@ -1,4 +1,5 @@
 const Order = require("./order")
+const Drink = require('./drink')
 
 class CoffeeMachine {
 
@@ -9,10 +10,10 @@ class CoffeeMachine {
     constructor(drinkMaker /* DrinkMaker */) {
         this.drinkMaker = drinkMaker;
         this.prices = {
-            "C": 60,
-            "T": 40,
-            "H": 50,
-            "O": 60,
+            [Drink.COFFEE]: 60,
+            [Drink.TEA]: 40,
+            [Drink.HOT_CHOCOLATE]: 50,
+            [Drink.ORANGE_JUICE]: 60,
         }
     }
 
@@ -35,19 +36,19 @@ class CoffeeMachine {
     }
 
     pressCoffee() {
-        this._processOrder(new Order("C", this.sugar, this.extraHot))
+        this._processOrder(new Order(Drink.COFFEE, this.sugar, this.extraHot))
     }
 
     pressTea() {
-        this._processOrder(new Order("T", this.sugar, this.extraHot))
+        this._processOrder(new Order(Drink.TEA, this.sugar, this.extraHot))
     }
 
     pressChocolate() {
-        this._processOrder(new Order("H", this.sugar, this.extraHot))
+        this._processOrder(new Order(Drink.HOT_CHOCOLATE, this.sugar, this.extraHot))
     }
 
     pressOrange() {
-        this._processOrder(new Order("O", this.sugar, false))
+        this._processOrder(new Order(Drink.ORANGE_JUICE, this.sugar, false))
     }
 
     pressSugar() {

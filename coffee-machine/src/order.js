@@ -1,5 +1,5 @@
 class Order {
-    constructor(drinkType, sugar, extraHot) {
+    constructor(drinkType /* Drink */, sugar, extraHot) {
         this.drinkType = drinkType
         this.sugar = sugar
         this.extraHot = extraHot

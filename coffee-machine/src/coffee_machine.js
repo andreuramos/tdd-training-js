@@ -4,6 +4,7 @@ class CoffeeMachine {
 
     sugar = 0
     money = 0
+    extraHot = false;
 
     constructor(drinkMaker) {
         this.drinkMaker = drinkMaker;
@@ -19,17 +20,30 @@ class CoffeeMachine {
             return
         }
 
-        if (this.sugar > 0) {
-            this.drinkMaker.execute(`${order.drinkCode}:${order.sugar}:0`)
-        } else {
-            this.drinkMaker.execute(`${order.drinkCode}::`)
+        let drinkCommand = order.drinkCode
+
+        if (order.isExtraHot) {
+            drinkCommand += 'h'
         }
+        
+        if (this.sugar > 0) {
+            drinkCommand += `:${order.sugar}:0`
+        } else {
+            drinkCommand += '::'
+        }
+
+        this.drinkMaker.execute(drinkCommand)
+    }
+
+    pressExtraHot() {
+        this.extraHot = true;
     }
 
     pressCoffee() {
         let order = new Order()
         order.makeCoffee()
         order.addSugar(this.sugar)
+        order.extraHot(this.extraHot)
 
         this._processOrder(order)
     }
@@ -38,6 +52,7 @@ class CoffeeMachine {
         let order = new Order()
         order.makeTea()
         order.addSugar(this.sugar)
+        order.extraHot(this.extraHot)
 
         this._processOrder(order)
     }
@@ -46,6 +61,7 @@ class CoffeeMachine {
         let order = new Order()
         order.makeChocolate()
         order.addSugar(this.sugar)
+        order.extraHot(this.extraHot)
 
         this._processOrder(order)
     }

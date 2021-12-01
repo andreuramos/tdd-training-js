@@ -41,6 +41,40 @@ describe('CoffeeMachine', function() {
     expect(drinkMaker.execute).toHaveBeenCalledWith("O::")
   })
 
+  describe('when extra hot button is pressed', () => {
+    it('makes extra hot coffe', function() {
+      coffeeMachine.putMoney(100)
+      coffeeMachine.pressExtraHot()
+      coffeeMachine.pressCoffee()
+  
+      expect(drinkMaker.execute).toHaveBeenCalledWith("Ch::");
+    })
+
+    it('makes extra hot tea', function() {
+      coffeeMachine.putMoney(100)
+      coffeeMachine.pressExtraHot()
+      coffeeMachine.pressTea()
+  
+      expect(drinkMaker.execute).toHaveBeenCalledWith("Th::");
+    });
+
+    it('makes extra hot chocolate', function() {
+      coffeeMachine.putMoney(100)
+      coffeeMachine.pressExtraHot()
+      coffeeMachine.pressChocolate()
+  
+      expect(drinkMaker.execute).toHaveBeenCalledWith("Hh::");
+    });
+
+    it('does not make extra hot orange juice', function() {
+      coffeeMachine.putMoney(100)
+      coffeeMachine.pressExtraHot()
+      coffeeMachine.pressOrange()
+  
+      expect(drinkMaker.execute).toHaveBeenCalledWith("O::");
+    });      
+  })
+
   describe('when suggar is pressed once before selecting drink', () => {
 
     it('serves coffee with one sugar and one stick', function(){
